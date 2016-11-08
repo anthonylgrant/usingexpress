@@ -2,6 +2,9 @@ var express = require("express");
 var app = express();
 var PORT = process.env.PORT || 8080; //default port 8080
 
+//tells the Express app to use EJS as its templating engine
+app.set("view engine", "ejs");
+
 var urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
   "9sm5xk": "http://www.google.com"
@@ -13,6 +16,16 @@ app.get("/", (req, res) => {
 
 app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
+});
+
+app.get('/urls', function (req, res) {
+  let templateVars = { urls: urlDatabase };
+  res.render("urls_index", templateVars);
+})
+
+app.get("/urls/:id", (req, res) => {
+  let templateVars = { shortURL: req.params.id };
+  res.render("urls_show", templateVars);
 });
 
 app.get("/hello", (req, res) => {
