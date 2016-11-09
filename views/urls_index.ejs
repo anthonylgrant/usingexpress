@@ -9,6 +9,36 @@
     <!-- Add your EJS code here -->
     <header>
       <% include ./partials/_header %>
+
+      <!--
+      <pre><%= JSON.stringify(urls, null, '\t') %>
+      -->
+      <!-- </pre> -->
+
+      <ul>
+      <% for(let id in urls) {
+        let url = urls[id]; %>
+        <li>
+          <a href="/urls/<%= id %>">
+            <%= url %>
+            /
+            <%= id %>
+          <a>
+        </li>
+        <%
+      }
+      %>
+      <!--
+      <% for (var i = 0; i < 10; i++) { %>
+        <% if (i == 7) { %>
+            <li>SEVEN!!</li>
+        <% } else { %>
+          <li><%= urls %></li>
+        <% } %>
+      <% } %>
+      -->
+    </ul>
     </header>
+    <!-- <h1>THIS IS A TEST</h1>  -->
 </body>
 </html>

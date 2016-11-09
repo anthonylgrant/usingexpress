@@ -1,3 +1,17 @@
-<header>
-  <% include ./partials/_header %>
-</header>
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <header>
+    <% include ./partials/_header %>
+  </header>
+  <section>
+    <h1>Here is your LongURL</h1>
+    <a href="<%= longURL %>"> <%= longURL %> </a>
+    <h2>Here is your ShortURL</h2>
+    <a href="/u/<%= shortURL %>"> <%= shortURL %> </a
+  </section>
+</body>
+</html>
