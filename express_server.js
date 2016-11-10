@@ -43,19 +43,20 @@ app.get('/urls', function (req, res) {
   res.render("urls_index", { urls: urlDatabase });
 })
 
-// WILDCARD STRINGS
+  // WILDCARD STRINGS
 app.get("/urls/new", (req, res) => {
   res.render("urls_new");
 });
 
 app.get("/u/:shortURL", (req, res) => {
-  let longURL = urlDatabase[req.params.shortURL];
-  res.redirect(longURL);
+  // let longURL = urlDatabase[req.params.shortURL];
+  res.redirect(req.params.shortURL);
 });
 
 
 app.get("/urls/:id", (req, res) => {
   let key = req.params.id;
+  console.log(key);
   let templateVars = { shortURL: key, longURL: urlDatabase[key] };
   res.render("urls_show", templateVars);
 });
@@ -77,6 +78,15 @@ app.post("/urls/:id/delete", (req, res) => {
   let shortURL = req.params.id;
   delete urlDatabase[shortURL];
   res.redirect("/urls");
+});
+
+app.post("/urls/:id/update", (req, res) => {
+  let longURL = req.body.longURL;
+  let shortURL = req.params.id;
+  urlDatabase[shortURL] = longURL;
+  // console.log("LKSDJF:KLJWE----------------");
+  // console.log(shortURL);
+  res.redirect(`/urls/${shortURL}`)
 });
 
 function generateRandomString(length) {
