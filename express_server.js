@@ -1,32 +1,21 @@
 
 
+
+
 var express = require("express");
 var app = express();
 var PORT = process.env.PORT || 8080; //default port 8080
-
 const bodyParser = require("body-parser");
 //USE
 app.use(bodyParser.urlencoded({extended: true}));
 
 //tells the Express app to use EJS as its templating engine
 app.set("view engine", "ejs");
-//LISTEN
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}!`);
-});
 
-
-/* HARDCODED STUFF
-*
-*
-*/
 var urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
   "9sm5xk": "http://www.google.com"
 };
-/*
-*
-*/
 
 //GET
 app.get("/", (req, res) => {
@@ -49,14 +38,15 @@ app.get("/urls/new", (req, res) => {
 });
 
 app.get("/u/:shortURL", (req, res) => {
-  // let longURL = urlDatabase[req.params.shortURL];
-  res.redirect(req.params.shortURL);
+  let longURL = urlDatabase[req.params.shortURL];
+  // debugger;
+  res.redirect(longURL);
 });
 
 
 app.get("/urls/:id", (req, res) => {
   let key = req.params.id;
-  console.log(key);
+  // console.log(key);
   let templateVars = { shortURL: key, longURL: urlDatabase[key] };
   res.render("urls_show", templateVars);
 });
@@ -71,7 +61,7 @@ app.post("/urls", (req, res) => {
   let longURL = req.body.longURL;
   let shortURL = generateRandomString(6);
   urlDatabase[shortURL] = longURL;
-  res.redirect(`/urls/${shortURL}`)
+  res.redirect(`/urls/${shortURL}`);
 });
 
 app.post("/urls/:id/delete", (req, res) => {
@@ -86,9 +76,14 @@ app.post("/urls/:id/update", (req, res) => {
   urlDatabase[shortURL] = longURL;
   // console.log("LKSDJF:KLJWE----------------");
   // console.log(shortURL);
-  res.redirect(`/urls/${shortURL}`)
+  res.redirect(`/urls/${shortURL}`);
 });
 
 function generateRandomString(length) {
     return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1);
 }
+
+//LISTEN
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}!`);
+});
