@@ -19,25 +19,20 @@
       <% for(let id in urls) {
         let url = urls[id]; %>
         <li>
-          <a href="/urls/<%= id %>">
-            <%= url %>
-            /
-            <%= id %>
+          <a href="/urls/<%= id %>"><%= url %>/<%= id %>
           <a>
+
+          <form method="POST" action="/urls/<%= id %>/delete">
+          <input type="submit" value="Delete"></form>
         </li>
         <%
       }
       %>
-      <!--
-      <% for (var i = 0; i < 10; i++) { %>
-        <% if (i == 7) { %>
-            <li>SEVEN!!</li>
-        <% } else { %>
-          <li><%= urls %></li>
-        <% } %>
-      <% } %>
-      -->
     </ul>
+
+
+
+
     </header>
     <!-- <h1>THIS IS A TEST</h1>  -->
 </body>

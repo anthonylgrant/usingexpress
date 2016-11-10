@@ -66,12 +66,17 @@ app.get("/hello", (req, res) => {
 
 //POST
 app.post("/urls", (req, res) => {
-  console.log(req.body);  // debug statement to see POST parameters
-  //
+  //console.log(req.body);  // debug statement to see POST parameters
   let longURL = req.body.longURL;
   let shortURL = generateRandomString(6);
   urlDatabase[shortURL] = longURL;
   res.redirect(`/urls/${shortURL}`)
+});
+
+app.post("/urls/:id/delete", (req, res) => {
+  let shortURL = req.params.id;
+  delete urlDatabase[shortURL];
+  res.redirect("/urls");
 });
 
 function generateRandomString(length) {
