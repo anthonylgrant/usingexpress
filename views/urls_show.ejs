@@ -10,12 +10,14 @@
   <section>
     <strong>Here is your ShortURL: </strong>
     <a href="/u/<%= shortURL %>"> <%= shortURL %> </a>
-
-    <form action="/urls/<%= shortURL %>/update" method="POST" style="margin: 50px auto;">
+    <div style="margin-top:20px">
+      <strong>Edit your URL</strong>
+      <form action="/urls/<%= shortURL %>/update" method="POST" style="margin: 10px auto;">
       <!-- <label for="longURL">Edit a URL:</label> -->
       <input type="text" name="longURL" placeholder="<%= longURL %>" style="width: 300px; height: 100%">
       <input type="submit" value="Edit">
     </form>
+    </div>
   </section>
 </body>
 </html>

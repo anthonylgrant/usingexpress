@@ -43,7 +43,6 @@ app.get("/u/:shortURL", (req, res) => {
   res.redirect(longURL);
 });
 
-
 app.get("/urls/:id", (req, res) => {
   let key = req.params.id;
   // console.log(key);
