@@ -83,12 +83,17 @@ app.post("/urls/:id/update", (req, res) => {
   res.redirect(`/urls/${shortURL}`);
 });
 
+  //COOKIE - POST
 app.post("/urls/login", (req, res) => {
   let username = req.body.username;
   res.cookie('username', username);
   res.redirect("/urls");
 });
 
+app.post("/urls/logout", (req, res) => {
+  res.clearCookie('username');
+  res.redirect("/urls");
+});
 
 function generateRandomString(length) {
     return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1);

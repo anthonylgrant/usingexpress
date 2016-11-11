@@ -12,12 +12,20 @@
             </div>
         </div>
 
-        <strong>Hello, <%= username %></strong>
+        <% if (username) {
+        %> Hello, <strong><%= username %></strong>
+        <% } %>
 
+
+        <% if (username) { %>
+            <form action="/urls/logout" method="POST">
+          <input type="submit" value="logout">
+        </form>
+         <% } else { %>
         <form action="/urls/login" method="POST">
           <input id="username" type="text" name="username" placeholder="Enter your username">
           <input type="submit" value="login">
-        </form>
+        </form><% } %>
 
         <ul class="nav navbar-nav" style="list-style:none; padding: 0;">
             <li><a href="/urls">URL Database</a></li>
