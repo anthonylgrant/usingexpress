@@ -3,16 +3,22 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/urls">
+            <a class="navbar-brand" href="/">
                 <span class="glyphicon glyphicon glyphicon-tree-deciduous"></span>
                 TinyApp
             </a>
             <div>
-            <a href="/urls/new">
-                Make a new short url
-            </a>
+                <a href="/urls/new">Make a new short url</a>
             </div>
         </div>
+
+        <strong>Hello, <%= username %></strong>
+
+        <form action="/urls/login" method="POST">
+          <input id="username" type="text" name="username" placeholder="Enter your username">
+          <input type="submit" value="login">
+        </form>
+
         <ul class="nav navbar-nav" style="list-style:none; padding: 0;">
             <li><a href="/urls">URL Database</a></li>
         </ul>
