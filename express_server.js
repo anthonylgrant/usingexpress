@@ -15,12 +15,32 @@ app.use(cookieParser());
 app.set("view engine", "ejs");
 
 var urlDatabase = {};
+var users =
+  {
+    "xyz":
+      {
+        id: "xyz",
+        email: "user@example.com",
+        password: "purple-monkey-dinosaur"
+      }
+      ,
+   "abc":
+     {
+      id: "abc",
+      email: "user2@example.com",
+      password: "dishwasher-funk"
+    }
+  }
   // "b2xVn2": "http://www.lighthouselabs.ca",
   // "9sm5xk": "http://www.google.com"
 
 //GET
 app.get("/", (req, res) => {
   res.end("Hello!");
+});
+
+app.get("/register", (req, res) => {
+  res.render("urls_register");
 });
 
 app.get("/urls.json", (req, res) => {
@@ -54,7 +74,7 @@ app.get("/u/:shortURL", (req, res) => {
 app.get("/urls/:id", (req, res) => {
   let key = req.params.id;
   // console.log(key);
-  let templateVars = { shortURL: key, longURL: urlDatabase[key] };
+  let templateVars = { shortURL: key, longURL: urlDatabase[key], username: req.cookies['username'] };
   res.render("urls_show", templateVars);
 });
 
@@ -94,6 +114,27 @@ app.post("/urls/logout", (req, res) => {
   res.clearCookie('username');
   res.redirect("/urls");
 });
+
+app.post("/register", (req, res) => {
+  let username = req.body.email;
+  let userRandomID = generateRandomString(12);
+  res.cookie('username', username);
+  // set cookie
+  // construct new USER(not users) object
+  // add to user: ID (userRandomID), email, and password
+  // if (username exists) {
+  //  send back 400 error
+  // }
+  // if (email field == null || password == null) {
+  //  send back 400 error
+  // }
+  //
+  // add user to USERS object
+
+  console.log(username);
+  res.redirect("/urls");
+});
+// Need to store ID, email, password
 
 function generateRandomString(length) {
     return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1);
