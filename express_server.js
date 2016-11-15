@@ -23,7 +23,7 @@ var userDatabase = {
       'xcqt3r': 'https://twitter.com/',
       '2j2js3': 'https://example.com',
       }
-    },
+    } ,
   "DEF" : {
     ID: "DEF",
     email: "anthony@an.com",
@@ -86,8 +86,18 @@ app.get("/u/:shortURL", (req, res) => {
   console.log(req.params.shortURL);
   let shortURL = req.params.shortURL;
   console.log("This is req.params.shortURL: ", shortURL);
-  console.log(userDatabase[req.cookies['userId']].urls[shortURL])
-  let longURL = userDatabase[req.cookies['userId']].urls[shortURL];
+  // console.log(userDatabase[req.cookies['userId']].urls[shortURL])
+
+  let longURL = null;
+  for (var userid in userDatabase) {
+    for (var urls in userDatabase[userid].urls) {
+      if (urls === req.params.shortURL) {
+        console.log("its working", req.params.shortURL);
+        longURL = userDatabase[userid].urls[req.params.shortURL];
+      }
+    }
+  }
+
   res.redirect(longURL);
 });
 
