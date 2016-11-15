@@ -7,28 +7,35 @@
                 <span class="glyphicon glyphicon glyphicon-tree-deciduous"></span>
                 TinyApp
             </a>
-            <div>
-                <a href="/urls/new">Make a new short url</a>
-            </div>
+            <% if (username) { %>
+                <div>
+                    <a href="/urls/new">Make a new short url</a>
+                </div>
+            <% } %>
         </div>
 
-        <% if (username) {
-        %> Hello, <strong><%= username %></strong>
+        <!-- IF USER ISN'T LOGGED IN -->
+        <% if (!username) { %>
+        <a href="/register">Register Now!</a>
+        <form action="/urls/login" method="POST" style="margin-top: 20px">
+            <input id="username" type="email" name="email" placeholder="Enter your username">
+            <input type="password" name="password" placeholder="Enter password" style="max-width: 200px; height: 100%">
+          <input type="submit" value="login">
+        </form>
         <% } %>
 
-
+        <!-- IF USER IS LOGGED IN -->
         <% if (username) { %>
-            <form action="/urls/logout" method="POST">
-          <input type="submit" value="logout">
+        <span>Hello, </span>
+        <strong><%= username %></strong>
+        <form action="/urls/logout" method="POST">
+        <input type="submit" value="logout">
         </form>
-         <% } else { %>
-        <form action="/urls/login" method="POST">
-          <input id="username" type="text" name="username" placeholder="Enter your username">
-          <input type="submit" value="login">
-        </form><% } %>
+
 
         <ul class="nav navbar-nav" style="list-style:none; padding: 0;">
             <li><a href="/urls">URL Database</a></li>
         </ul>
+        <% } %>
     </div>
 </nav>

@@ -23,6 +23,11 @@
     <header>
       <% include ./partials/_header %>
 
+      <!--
+      <pre><%= JSON.stringify(urls, null, '\t') %>
+      -->
+      <!-- </pre> -->
+
       <ul class="urls">
       <% for(let id in urls) {
           let url = urls[id]; %>
